@@ -61,14 +61,6 @@
                     <i class="fa-solid fa-gear text-slate-600"></i>
                     <span class="hidden sm:inline">Pengaturan</span>
                 </button>
-                <button onclick="openModal('githubModal')" class="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-2.5 rounded-xl text-xs sm:text-sm transition font-medium flex items-center space-x-1.5 shadow-sm">
-                    <i class="fa-brands fa-github text-base"></i>
-                    <span>Sync GitHub</span>
-                </button>
-                <button onclick="openModal('xamppModal')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2.5 rounded-xl text-xs sm:text-sm transition font-medium flex items-center space-x-1.5 shadow-sm">
-                    <i class="fa-solid fa-database"></i>
-                    <span>Database XAMPP</span>
-                </button>
             </div>
         </div>
     </header>
@@ -364,91 +356,6 @@
                 <div class="flex justify-end space-x-2 pt-3">
                     <button type="button" onclick="closeModal('settingsModal')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium rounded-xl transition">Batal</button>
                     <button type="submit" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-medium rounded-xl transition shadow-sm">Simpan Pengaturan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal Integrasi GitHub -->
-    <div id="githubModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 space-y-4">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-                <h3 class="font-bold text-slate-900 flex items-center space-x-2">
-                    <i class="fa-brands fa-github text-lg"></i>
-                    <span>Hubungkan & Sinkronisasi ke GitHub</span>
-                </h3>
-                <button onclick="closeModal('githubModal')" class="text-slate-400 hover:text-slate-600">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <p class="text-xs text-slate-500 leading-relaxed">
-                Simpan dan sinkronkan data absensi harian, mingguan, serta bulanan secara online langsung ke repository GitHub pribadi atau organisasi Anda menggunakan GitHub Personal Access Token (PAT).
-            </p>
-
-            <form onsubmit="handleGithubSync(event)" class="space-y-3.5">
-                <div>
-                    <label class="block text-xs font-medium text-slate-700 mb-1">GitHub Username / Organization</label>
-                    <input type="text" id="ghUser" placeholder="contoh: namapengguna" required class="w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none font-mono">
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-700 mb-1">Nama Repository</label>
-                    <input type="text" id="ghRepo" placeholder="contoh: absensi-smp-angkasa" required class="w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none font-mono">
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-700 mb-1">Personal Access Token (PAT)</label>
-                    <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxx" required class="w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none font-mono">
-                    <p class="text-[10px] text-slate-400 mt-1">Token memerlukan izin akses <code>repo</code> atau <code>contents</code>.</p>
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-700 mb-1">Target File Path di Repo</label>
-                    <input type="text" id="ghPath" value="data/absensi-rekap.json" required class="w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none font-mono">
-                </div>
-
-                <div class="flex justify-end space-x-2 pt-2">
-                    <button type="button" onclick="closeModal('githubModal')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium rounded-xl transition">Batal</button>
-                    <button type="submit" id="ghSyncBtn" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium rounded-xl transition shadow-sm flex items-center space-x-1.5">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <span>Push Data ke GitHub</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal Integrasi Database XAMPP -->
-    <div id="xamppModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 space-y-4">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-                <h3 class="font-bold text-slate-900 flex items-center space-x-2">
-                    <i class="fa-solid fa-database text-emerald-600"></i>
-                    <span>Koneksi Database XAMPP (MySQL)</span>
-                </h3>
-                <button onclick="closeModal('xamppModal')" class="text-slate-400 hover:text-slate-600">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <p class="text-xs text-slate-500 leading-relaxed">
-                Konfigurasi API backend lokal Anda (misal PHP MySQL pada Server XAMPP) untuk sinkronisasi data presensi guru secara lokal.
-            </p>
-
-            <form onsubmit="handleXamppSave(event)" class="space-y-3.5">
-                <div>
-                    <label class="block text-xs font-medium text-slate-700 mb-1">URL Endpoint Endpoint Server (PHP/API)</label>
-                    <input type="url" id="xamppUrl" placeholder="http://localhost/absensi-api/api.php" value="http://localhost/absensi-api/api.php" required class="w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none font-mono">
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-700 mb-1">Nama Database MySQL</label>
-                    <input type="text" id="xamppDb" placeholder="db_absensi_guru" value="db_absensi_guru" required class="w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none font-mono">
-                </div>
-
-                <div class="flex justify-end space-x-2 pt-2">
-                    <button type="button" onclick="closeModal('xamppModal')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium rounded-xl transition">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium rounded-xl transition shadow-sm flex items-center space-x-1.5">
-                        <i class="fa-solid fa-floppy-disk"></i>
-                        <span>Simpan Konfigurasi XAMPP</span>
-                    </button>
                 </div>
             </form>
         </div>
@@ -1062,77 +969,6 @@
                 });
             });
             return result;
-        }
-
-        async function handleGithubSync(e) {
-            e.preventDefault();
-            const user = document.getElementById('ghUser').value.trim();
-            const repo = document.getElementById('ghRepo').value.trim();
-            const token = document.getElementById('ghToken').value.trim();
-            const path = document.getElementById('ghPath').value.trim();
-            const btn = document.getElementById('ghSyncBtn');
-
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i><span>Menghubungkan ke GitHub...</span>';
-
-            const payloadData = {
-                school: appConfig.schoolName,
-                lastSync: new Date().toISOString(),
-                config: appConfig,
-                logs: allAttendanceLogs
-            };
-
-            const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(payloadData, null, 2))));
-            const apiUrl = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
-
-            try {
-                let sha = null;
-                const getRes = await fetch(apiUrl, {
-                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
-                });
-                if (getRes.ok) {
-                    const fileData = await getRes.json();
-                    sha = fileData.sha;
-                }
-
-                const putBody = {
-                    message: `Sync Rekap Absensi Guru SMP Angkasa - ${new Date().toLocaleString('id-ID')}`,
-                    content: contentEncoded,
-                };
-                if (sha) putBody.sha = sha;
-
-                const putRes = await fetch(apiUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(putBody)
-                });
-
-                if (putRes.ok) {
-                    showToast('Sync GitHub Berhasil', 'Data absensi telah berhasil di-push ke repository GitHub.', 'success');
-                    closeModal('githubModal');
-                } else {
-                    const errJson = await putRes.json();
-                    showToast('Gagal Sinkronisasi', errJson.message || 'Periksa kembali Username, Repo, atau Personal Token.', 'error');
-                }
-            } catch (err) {
-                showToast('Koneksi Gagal', 'Terjadi kesalahan jaringan saat menghubungi GitHub API.', 'error');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i><span>Push Data ke GitHub</span>';
-            }
-        }
-
-        function handleXamppSave(e) {
-            e.preventDefault();
-            const url = document.getElementById('xamppUrl').value.trim();
-            const db = document.getElementById('xamppDb').value.trim();
-            localStorage.setItem('absensi_xampp_config', JSON.stringify({ url, db }));
-            closeModal('xamppModal');
-            showToast('Tersimpan', 'Konfigurasi database XAMPP berhasil diperbarui.', 'success');
         }
 
         function resetSingleRecord(nip) {
